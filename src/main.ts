@@ -13,6 +13,7 @@ async function bootstrap() {
     .setTitle('Push Notifications API')
     .setDescription('API para el envío de notificaciones push')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('v1/api', app, document);

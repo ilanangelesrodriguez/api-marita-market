@@ -9,4 +9,7 @@ export class CreateUserDto {
 
   @ApiProperty()
   estado: string; // activo, inactivo, suspendido
+
+  @ApiProperty()
+  password: string;
 }

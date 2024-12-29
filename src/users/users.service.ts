@@ -34,4 +34,13 @@ export class UsersService {
       throw new NotFoundException(`Usuario con ID ${id} no encontrado`);
     }
   }
+
+  async validateUser(email: string, password: string): Promise<User | null> {
+    const user = await this.userRepository.findOne({ where: { email, password } });
+    if (!user) {
+      return null;
+    }
+    return user;
+  }
+
 }

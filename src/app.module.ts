@@ -6,6 +6,7 @@ import { DevicesModule } from './devices/devices.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -30,7 +31,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     }),
     UsersModule,
     DevicesModule,
-    NotificationsModule],
+    NotificationsModule,
+    AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -1,8 +1,19 @@
-import { Controller, Get, Post, Body, Param, HttpStatus, HttpCode, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  HttpStatus,
+  HttpCode,
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
 import { NotificationsService } from './notifications.service';
 import { CreateNotificationDto } from './dto/create-notification.dto';
-import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { Notification } from './notification.entity';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('notifications')
 export class NotificationsController {
@@ -24,6 +35,8 @@ export class NotificationsController {
     return this.notificationsService.getNotification(id);
   }
 
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @Get()
   @ApiOperation({ summary: 'Obtener todas las notificaciones' })
   @ApiResponse({ status: 200, description: 'Notificaciones obtenidas correctamente.' })

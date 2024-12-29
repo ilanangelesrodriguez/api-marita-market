@@ -16,6 +16,9 @@ export class User {
   @Column()
   estado: string; // activo, inactivo, suspendido
 
+  @Column({ nullable: false })
+  password: string;
+
   // Relación uno a muchos con Device
   @OneToMany(() => Device, (device) => device.user)
   devices: Device[];
