@@ -5,8 +5,8 @@
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
+
+<p align="center">
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
@@ -22,17 +22,24 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
+<p align="center"><strong><h1 align="center">API de Notificaciones Push</h1></strong></p>
+
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Este proyecto es una aplicación del lado del servidor basada en [Nest](https://github.com/nestjs/nest)  diseñada para gestionar usuarios, dispositivos y notificaciones. Incluye autenticación mediante JWT, gestión de usuarios, gestión de dispositivos y envío de notificaciones.
 
-## Project setup
-
+## Configuración del proyecto
 ```bash
+$ git clone <repository-url>
+
+$ cd <project-directory>
+
+$ cp .env.example .env
+
 $ npm install
 ```
 
-## Compile and run the project
+## Compilar y ejecutar el proyecto
 
 ```bash
 # development
@@ -45,54 +52,99 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Run tests
+## Endpoints de la API
 
-```bash
-# unit tests
-$ npm run test
+### Autenticación
 
-# e2e tests
-$ npm run test:e2e
+#### `POST /auth/login`
+- **Descripción**: Iniciar sesión para obtener un JWT.
+- **Body**:
+    - `username`: Nombre de usuario.
+    - `password`: Contraseña.
 
-# test coverage
-$ npm run test:cov
-```
+---
 
-## Deployment
+### Usuarios
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+#### `POST /users`
+- **Descripción**: Crear un nuevo usuario.
+- **Body**:
+    - `username`: Nombre de usuario.
+    - `password`: Contraseña.
+    - `email`: Correo electrónico.
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+#### `GET /users/:id`
+- **Descripción**: Obtener un usuario por ID.
+- **Params**:
+    - `id`: ID del usuario.
 
-```bash
-$ npm install -g mau
-$ mau deploy
-```
+#### `GET /users`
+- **Descripción**: Obtener todos los usuarios.
+- **Respuesta**: Lista de usuarios.
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+#### `DELETE /users/:id`
+- **Descripción**: Eliminar un usuario por ID.
+- **Params**:
+    - `id`: ID del usuario.
 
-## Resources
+---
 
-Check out a few resources that may come in handy when working with NestJS:
+### Dispositivos
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+#### `POST /devices`
+- **Descripción**: Crear un nuevo dispositivo.
+- **Body**:
+    - `deviceId`: ID del dispositivo.
+    - `userId`: ID del usuario al que pertenece el dispositivo.
+    - `type`: Tipo de dispositivo (por ejemplo, "android", "ios").
+    - `token`: Token para enviar notificaciones push.
+
+#### `GET /devices/:id`
+- **Descripción**: Obtener un dispositivo por ID.
+- **Params**:
+    - `id`: ID del dispositivo.
+
+#### `GET /devices`
+- **Descripción**: Obtener todos los dispositivos.
+- **Respuesta**: Lista de dispositivos.
+
+#### `DELETE /devices/:id`
+- **Descripción**: Eliminar un dispositivo por ID.
+- **Params**:
+    - `id`: ID del dispositivo.
+
+---
+
+### Notificaciones
+
+#### `POST /notifications`
+- **Descripción**: Enviar una nueva notificación.
+- **Body**:
+    - `message`: Mensaje de la notificación.
+    - `deviceId`: ID del dispositivo al que se enviará la notificación.
+
+#### `GET /notifications/:id`
+- **Descripción**: Obtener una notificación por ID.
+- **Params**:
+    - `id`: ID de la notificación.
+
+#### `GET /notifications`
+- **Descripción**: Obtener todas las notificaciones.
+- **Respuesta**: Lista de notificaciones.
+
+#### `DELETE /notifications/:id`
+- **Descripción**: Eliminar una notificación por ID.
+- **Params**:
+    - `id`: ID de la notificación.
 
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
-## Stay in touch
+## Mantente en contacto
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- Autor - [Ilan Angeles Rodriguez](https://linkedin.com/in/ilanangelesrodriguez)
+- Sitio web - [https://ilanangelesrodriguez.vercel.app](https://ilanangelesrodriguez.vercel.app/)
 
 ## License
 
