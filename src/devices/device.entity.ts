@@ -7,18 +7,18 @@ export class Device {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => User, (user) => user.devices)
+  @ManyToOne(() => User, (user) => user.devices, { nullable: false })
   user: User;
 
-  @Column()
+  @Column({ nullable: false })
   token: string;
 
-  @Column()
+  @Column({ nullable: false })
   tipo: string; // android, ios, web
 
-  @Column()
+  @Column({ nullable: false })
   estado: string; // activo, desconectado
 
-  @ManyToOne(() => Notification, (notification) => notification.device)
+  @ManyToOne(() => Notification, (notification) => notification.device, { nullable: false })
   notifications: Notification[];
 }
