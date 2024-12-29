@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { User } from '../users/user.entity';
+import { Notification } from '../notifications/notification.entity';
 
 @Entity()
 export class Device {
@@ -17,4 +18,7 @@ export class Device {
 
   @Column()
   estado: string; // activo, desconectado
+
+  @ManyToOne(() => Notification, (notification) => notification.device)
+  notifications: Notification[];
 }
