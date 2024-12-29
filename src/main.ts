@@ -5,6 +5,9 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  // Configurar el prefijo global de la API
+  app.setGlobalPrefix('v1/api');
+
   // Configuración de Swagger
   const config = new DocumentBuilder()
     .setTitle('Push Notifications API')
@@ -12,8 +15,7 @@ async function bootstrap() {
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
-
+  SwaggerModule.setup('v1/api', app, document);
 
   await app.listen(process.env.PORT ?? 3002);
 }
