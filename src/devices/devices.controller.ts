@@ -17,32 +17,32 @@ export class DevicesController {
   constructor(private readonly devicesService: DevicesService) {}
 
   @Post()
-  @ApiOperation({ summary: 'Create a new device' })
-  @ApiResponse({ status: 201, description: 'Device created successfully.' })
+  @ApiOperation({ summary: 'Crear un nuevo dispositivo' })
+  @ApiResponse({ status: 201, description: 'Dispositivo creado correctamente.' })
   @HttpCode(HttpStatus.CREATED)
   async createDevice(@Body() createDeviceDto: CreateDeviceDto): Promise<Device> {
     return this.devicesService.createDevice(createDeviceDto);
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Get a device by its ID' })
-  @ApiResponse({ status: 200, description: 'Device retrieved successfully.' })
-  @ApiResponse({ status: 404, description: 'Device not found.' })
+  @ApiOperation({ summary: 'Obtener un dispositivo por su ID' })
+  @ApiResponse({ status: 200, description: 'Dispositivo obtenido correctamente.' })
+  @ApiResponse({ status: 404, description: 'Dispositivo no encontrado.' })
   async getDevice(@Param('id') id: number): Promise<Device> {
     return this.devicesService.getDevice(id);
   }
 
   @Get()
-  @ApiOperation({ summary: 'Get all devices' })
-  @ApiResponse({ status: 200, description: 'Devices retrieved successfully.' })
+  @ApiOperation({ summary: 'Obtener todos los dispositivos' })
+  @ApiResponse({ status: 200, description: 'Dispositivos obtenidos correctamente.' })
   async getAllDevices(): Promise<Device[]> {
     return this.devicesService.getAllDevices();
   }
 
   @Delete(':id')
-  @ApiOperation({ summary: 'Delete a device by its ID' })
-  @ApiResponse({ status: 204, description: 'Device deleted successfully.' })
-  @ApiResponse({ status: 404, description: 'Device not found.' })
+  @ApiOperation({ summary: 'Eliminar un dispositivo por su ID' })
+  @ApiResponse({ status: 204, description: 'Dispositivo eliminado correctamente.' })
+  @ApiResponse({ status: 404, description: 'Dispositivo no encontrado.' })
   @HttpCode(HttpStatus.NO_CONTENT)
   async deleteDevice(@Param('id') id: number): Promise<void> {
     return this.devicesService.deleteDevice(id);

@@ -16,10 +16,10 @@ export class Notification {
   @Column()
   fechaEnvio: Date;
 
-  @ManyToOne(() => User, (user) => user.notifications)
+  @ManyToOne(() => User, (user) => user.notifications, { nullable: true })
   user: User;
 
-  @ManyToOne(() => Device, (device) => device.notifications)
+  @ManyToOne(() => Device, (device) => device.notifications, { nullable: true })
   device: Device;
 
   @Column()

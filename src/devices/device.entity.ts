@@ -19,6 +19,6 @@ export class Device {
   @Column({ nullable: false })
   estado: string; // activo, desconectado
 
-  @ManyToOne(() => Notification, (notification) => notification.device, { nullable: false })
+  @ManyToOne(() => Notification, (notification) => notification.device, { nullable: true })
   notifications: Notification[];
 }
