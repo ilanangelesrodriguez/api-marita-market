@@ -19,6 +19,8 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 export class NotificationsController {
   constructor(private readonly notificationsService: NotificationsService) {}
 
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @Post()
   @ApiOperation({ summary: 'Enviar una nueva notificación' })
   @ApiResponse({ status: 201, description: 'Notificación enviada correctamente.' })
@@ -27,6 +29,8 @@ export class NotificationsController {
     return this.notificationsService.sendNotification(createNotificationDto);
   }
 
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @Get(':id')
   @ApiOperation({ summary: 'Obtener una notificación por su ID' })
   @ApiResponse({ status: 200, description: 'Notificación obtenida correctamente.' })
@@ -44,6 +48,8 @@ export class NotificationsController {
     return this.notificationsService.getAllNotifications();
   }
 
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @Delete(':id')
   @ApiOperation({ summary: 'Eliminar una notificación por su ID' })
   @ApiResponse({ status: 204, description: 'Notificación eliminada correctamente.' })
